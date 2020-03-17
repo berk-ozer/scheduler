@@ -13,6 +13,7 @@ import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment"
 import Header from "components/Appointment/Header"
 import Empty from "components/Appointment/Empty"
+import Show from "components/Appointment/Show"
 
 
 // 
@@ -185,5 +186,13 @@ storiesOf("Appointment", module)
   .add("Empty", () => (
     <Empty
       onAdd={action("onAdd")}
+    />
+  ))
+  .add("Show", () => (
+    <Show
+      student="Lydia Miller-Jones"
+      interviewer={interviewer}
+      onEdit={action("onEdit")}
+      onDelete={action("onDelete")}
     />
   ))
