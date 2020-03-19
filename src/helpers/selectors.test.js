@@ -64,7 +64,7 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
 
 // getInterview test
 
-cosnt interviewers: {
+const interviewers = {
   "1": {  
     "id": 1,
     "name": "Sylvia Palmer",
