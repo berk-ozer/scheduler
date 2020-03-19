@@ -28,17 +28,17 @@ export const getInterviewersForDay = (state, day) => {
     return [];
   }
 
-  const appointmentIds = dayObj.appointments;
+  const interviewerIds = dayObj.interviewers;
 
-  const appointmentsForDay = [];
+  const interviewersForDay = [];
 
-  for (const id in state.appointments) {
-    if (appointmentIds.includes(Number(id))) {
-      appointmentsForDay.push(state.appointments[id])
+  for (const id in state.interviewers) {
+    if (interviewerIds.includes(Number(id))) {
+      interviewersForDay.push(state.interviewers[id])
     }
   }
 
-  return appointmentsForDay;
+  return interviewersForDay;
 }
 
 
