@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import DayList from "components/DayList";
 import Appointment from "components/Appointment"
-import { getAppointmentsForDay } from "helpers/selectors"
+import { getAppointmentsForDay, getInterview } from "helpers/selectors"
 
 import axios from "axios";
 
@@ -36,7 +36,7 @@ export default function Application(props) {
       <Appointment
         key={appointment.id}
         {...appointment}
-        interview
+        interview={interview}
       />
     )
   })
