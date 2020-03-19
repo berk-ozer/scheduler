@@ -21,6 +21,7 @@ export const getAppointmentsForDay = (state, day) => {
 
 
 
+
 export const getInterviewersForDay = (state, day) => {
   const dayObj = state.days.find(elem => elem.name === day);
 
@@ -40,6 +41,7 @@ export const getInterviewersForDay = (state, day) => {
 
   return interviewersForDay;
 }
+
 
 
 
