@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-
 import DayList from "components/DayList";
 import Appointment from "components/Appointment"
-import getAppointmentsForDay from "helpers/selectors"
+import { getAppointmentsForDay } from "helpers/selectors"
 
 import axios from "axios";
 
@@ -26,6 +25,8 @@ export default function Application(props) {
       setState(state => ({...state, days: all[0].data, appointments: all[1].data}));
     })
   }, []);
+
+  const appointmentsForDay = getAppointmentsForDay(state, state.day);
 
   return (
     <main className="layout">
@@ -50,12 +51,12 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        {appointments.map(appointment => (
+        {appointmentsForDay.map(appointment => 
           <Appointment
             key={appointment.id}
             {...appointment}
           />
-        ))}
+          )}
         <Appointment id="last" time="5pm" />
       </section>
     </main>
