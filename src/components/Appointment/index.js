@@ -14,6 +14,7 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVE = "SAVE";
+const DELETE = "DELETE";
 
 
 
@@ -38,6 +39,15 @@ export default function Appointment(props) {
 
 
 
+  function deleteInterview() {
+    transition(DELETE);
+
+    props.cancelInterview(props.id)
+      .then(() => transition(EMPTY));
+  } 
+
+
+
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -52,6 +62,7 @@ export default function Appointment(props) {
         <Show
         student={props.interview.student}
         interviewer={props.interview.interviewer}
+        onDelete={deleteInterview}
         /> 
       )}
 
@@ -65,7 +76,13 @@ export default function Appointment(props) {
 
       {mode === SAVE && (
         <Status
-          message={"Saving"}
+          message="Saving"
+        />
+      )}
+
+      {mode === DELETE && (
+        <Status
+          message="Deleting"
         />
       )}
 
