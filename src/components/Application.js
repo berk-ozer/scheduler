@@ -23,6 +23,7 @@ export default function Application(props) {
 
 
 
+
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -32,6 +33,7 @@ export default function Application(props) {
       setState(state => ({...state, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     })
   }, []);
+
 
 
 
@@ -52,6 +54,25 @@ export default function Application(props) {
 
 
 
+
+  function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
+
+    return axios.delete(`/api/appointments/${id}`)
+      .then(response => setState(state => ({ ...state, appointments })));
+  }
+
+
+
+
   const appointmentsForDay = getAppointmentsForDay(state, state.day);
 
   const interviewersForDay = getInterviewersForDay(state, state.day);
@@ -65,6 +86,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewersForDay}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     )
   })
