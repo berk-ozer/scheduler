@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+
+
+
 export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
@@ -23,6 +26,15 @@ export default function useApplicationData() {
       setState(state => ({...state, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
     })
   }, []);
+
+
+
+
+  // Updates remaining spots in days after any appointment is changed 
+  useEffect(() => {
+    axios.get("/api/days")
+      .then(days => setState(state => ({ ...state, days: days.data })));
+  }, [state.appointments])
 
 
 
