@@ -106,7 +106,7 @@ export default function useApplicationData() {
 
 
   
-  // Returns state and functions to be used in Application
+  // Returns state and functions to be used in Application.js
   return {
     state, 
     setDay,
