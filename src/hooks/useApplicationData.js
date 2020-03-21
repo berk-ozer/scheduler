@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 
-
+// Constants used with the reducer
 const SET_DAY = "SET_DAY";
 const SET_DAYS = "SET_DAYS";
 const SET_APP_DATA = "SET_APP_DATA";
@@ -12,7 +12,9 @@ const SET_INTERVIEW = "SET_INTERVIEW";
 
 
 
+// Reducer function which handles state
 function reducer(state, action) {
+
   const reducers = {
     [SET_DAY]: function(state, value) {
       return ({ ...state, ...value });
@@ -47,6 +49,8 @@ function reducer(state, action) {
 
 
 export default function useApplicationData() {
+
+  // State management
   const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
     days: [],
@@ -54,10 +58,16 @@ export default function useApplicationData() {
     interviewers: {}
   })
 
+
+
+
+  // Updates state for day
   const setDay = day => dispatch({ type: SET_DAY, value: {day} });
 
 
 
+
+  // Gets data from db to set state, ran on initial render
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -69,7 +79,7 @@ export default function useApplicationData() {
 
 
 
-  // Updates remaining spots in days after any appointment is changed 
+  // Updates remaining spots in days after an interview is set
   useEffect(() => {
     axios.get("/api/days")
       .then(days => dispatch({ type: SET_DAYS, value: days.data }));
@@ -78,6 +88,7 @@ export default function useApplicationData() {
 
 
 
+  // Books or updates an interview, updates db and state
   function bookInterview(id, interview) {
     return axios.put(`/api/appointments/${id}`, {interview})
       .then(response => dispatch({ type: SET_INTERVIEW, value: {id, interview} }));
@@ -86,6 +97,7 @@ export default function useApplicationData() {
 
 
 
+  // Cancels an interview, updates db and state
   function cancelInterview(id) {
     return axios.delete(`/api/appointments/${id}`)
       .then(response => dispatch({ type: SET_INTERVIEW, value: {id, interview: null} }));
@@ -94,6 +106,7 @@ export default function useApplicationData() {
 
 
   
+  // Returns state and functions to be used in Application
   return {
     state, 
     setDay,
