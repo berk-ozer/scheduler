@@ -147,4 +147,31 @@ describe("Application", () => {
     fireEvent.click(getByAltText(appointment, "Close"));
     expect(getByPlaceholderText(appointment, /enter student name/i)).toBeInTheDocument();
   });
+
+
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+    axios.delete.mockRejectedValueOnce();
+
+    // Render component and wait for data to load
+    const { container } = render(<Application/>);
+
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
+    const appointment = getAllByTestId(container, "appointment").find(appointment => 
+      queryByText(appointment, "Archie Cohen")
+    );
+
+    // Try to delete an appointment
+    fireEvent.click(getByAltText(appointment, "Delete"));
+    fireEvent.click(getByText(appointment, "Confirm"));
+
+    // Validate
+    expect(getByText(appointment, ("Deleting"))).toBeInTheDocument();
+
+    await waitForElement(() => getByText(appointment, /could not cancel appointment/i))
+
+    // Check that we can close the error message
+    fireEvent.click(getByAltText(appointment, "Close"));
+    expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
+  });
 })
