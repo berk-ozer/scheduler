@@ -2,6 +2,8 @@ import React from "react";
 
 import { render, cleanup, waitForElement, fireEvent, getByText, queryByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
 
+import axios from "axios";
+
 import Application from "components/Application";
 
 afterEach(cleanup);
@@ -35,7 +37,7 @@ describe("Application", () => {
       target: { value: "Lydia Miller-Jones" }
     });
 
-    fireEvent.click(getByAltText(container, "Sylvia Palmer"));
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
 
     fireEvent.click(getByText(appointment, "Save"));
 
@@ -112,5 +114,37 @@ describe("Application", () => {
     // Not doing "spots remaining" testing
     // "spots remaining" functionality uses server side logic. My app fetches "days" with updated "spots" every time there is an interview scheduled or deleted
     // Talked to a mentor and they suggested I don't test for this here, because it's server side logic
+  });
+
+
+  it("shows the save error when failing to save an appointment", async () => {
+    axios.put.mockRejectedValueOnce();
+
+    // Render component and wait for data to load
+    const { container } = render(<Application/>);
+
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
+    const appointment = getAllByTestId(container, "appointment")[0];
+
+    // Try to book an appointment
+    fireEvent.click(getByAltText(appointment, "Add"));
+
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Lydia Miller-Jones" }
+    });
+
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+
+    fireEvent.click(getByText(appointment, "Save"));
+
+    // Validate
+    expect(getByText(appointment, ("Saving"))).toBeInTheDocument();
+
+    await waitForElement(() => getByText(appointment, /could not save appointment/i));
+
+    // Check that we can close the error message
+    fireEvent.click(getByAltText(appointment, "Close"));
+    expect(getByPlaceholderText(appointment, /enter student name/i)).toBeInTheDocument();
   });
 })
