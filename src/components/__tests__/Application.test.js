@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, queryByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -22,7 +22,7 @@ describe("Application", () => {
   
   it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
     // Render component and wait for data to load
-    const { container } = render(<Application/>);
+    const { container, debug } = render(<Application/>);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -39,7 +39,19 @@ describe("Application", () => {
 
     fireEvent.click(getByText(appointment, "Save"));
 
+    // Validation
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
-    console.log(prettyDOM(appointment));
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+
+    const day = getAllByTestId(container, "day").find(day => 
+      queryByText(day, "Monday")
+    );
+
+    // expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
+
+    // Not doing the above validation
+    // "spots remaining" functionality uses server side logic. My app fetches "days" with updated "spots" every time there is an interview scheduled or deleted
+    // Talked to a mentor and they suggested I don't test for this here, because it's server side logic
   });
 })
