@@ -80,4 +80,37 @@ describe("Application", () => {
     // "spots remaining" functionality uses server side logic. My app fetches "days" with updated "spots" every time there is an interview scheduled or deleted
     // Talked to a mentor and they suggested I don't test for this here, because it's server side logic
   });
+
+
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+    // Render component and wait for data to load
+    const { container } = render(<Application/>);
+
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
+    const appointment = getAllByTestId(container, "appointment").find(appointment => 
+        queryByText(appointment, "Archie Cohen")
+      );
+
+    // Edit the interview
+    fireEvent.click(getByAltText(appointment, "Edit"));
+
+    fireEvent.change(getByPlaceholderText(appointment, "Enter Student Name"), {
+      target: { value: "Berk Ozer" }
+    });
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+
+    fireEvent.click(getByText(appointment, "Save"));
+
+    //Validate
+    expect(getByText(appointment, ("Saving"))).toBeInTheDocument();
+
+    await waitForElement(() => getByText(appointment, "Berk Ozer"));
+    expect(getByText(appointment, "Sylvia Palmer")).toBeInTheDocument();
+
+
+    // Not doing "spots remaining" testing
+    // "spots remaining" functionality uses server side logic. My app fetches "days" with updated "spots" every time there is an interview scheduled or deleted
+    // Talked to a mentor and they suggested I don't test for this here, because it's server side logic
+  });
 })
