@@ -1,26 +1,28 @@
 import React from "react";
 
 import DayList from "components/DayList";
-import Appointment from "components/Appointment"
-import { getAppointmentsForDay, getInterviewersForDay, getInterview } from "helpers/selectors"
+import Appointment from "components/Appointment";
+import {
+  getAppointmentsForDay,
+  getInterviewersForDay,
+  getInterview,
+} from "helpers/selectors";
 import useApplicationData from "hooks/useApplicationData";
 
 import "components/Application.scss";
 
-
-
-
 export default function Application(props) {
-  const { state, setDay, bookInterview, cancelInterview } = useApplicationData()
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview,
+  } = useApplicationData();
 
-
-
-  
   const appointmentsForDay = getAppointmentsForDay(state, state.day);
   const interviewersForDay = getInterviewersForDay(state, state.day);
 
-
-  const schedule = appointmentsForDay.map(appointment => {
+  const schedule = appointmentsForDay.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
     return (
@@ -32,11 +34,8 @@ export default function Application(props) {
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
       />
-    )
-  })
-
-
-
+    );
+  });
 
   return (
     <main className="layout">
@@ -46,19 +45,15 @@ export default function Application(props) {
           src="images/logo.png"
           alt="Interview Scheduler"
         />
-      <hr className="sidebar__separator sidebar--centered" />
-      <nav className="sidebar__menu">
-        <DayList
-          days={state.days}
-          day={state.day}
-          setDay={setDay}
+        <hr className="sidebar__separator sidebar--centered" />
+        <nav className="sidebar__menu">
+          <DayList days={state.days} day={state.day} setDay={setDay} />
+        </nav>
+        <img
+          className="sidebar__lhl sidebar--centered"
+          src="images/lhl.png"
+          alt="Lighthouse Labs"
         />
-      </nav>
-      <img
-        className="sidebar__lhl sidebar--centered"
-        src="images/lhl.png"
-        alt="Lighthouse Labs"
-      />
       </section>
       <section className="schedule">
         {schedule}

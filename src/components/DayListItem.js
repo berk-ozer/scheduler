@@ -5,23 +5,23 @@ import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
   const dayClass = classnames("day-list__item", {
-    "day-list__item--selected" : props.selected,
-    "day-list__item--full": props.spots === 0
-  })
+    "day-list__item--selected": props.selected,
+    "day-list__item--full": props.spots === 0,
+  });
 
   const formatSpots = (numberOfSpots) => {
-    switch(numberOfSpots) {
+    switch (numberOfSpots) {
       case 0:
-        return 'no spots remaining';
+        return "no spots remaining";
       case 1:
-        return '1 spot remaining';
+        return "1 spot remaining";
       default:
-        return `${numberOfSpots} spots remaining`
+        return `${numberOfSpots} spots remaining`;
     }
-  }
+  };
 
   return (
-    <li 
+    <li
       className={dayClass}
       onClick={() => props.setDay(props.name)}
       data-testid="day"
@@ -30,4 +30,4 @@ export default function DayListItem(props) {
       <h3 className="text--light">{formatSpots(props.spots)}</h3>
     </li>
   );
-} 
+}

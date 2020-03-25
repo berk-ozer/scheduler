@@ -10,19 +10,18 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
-import Appointment from "components/Appointment"
-import Header from "components/Appointment/Header"
-import Empty from "components/Appointment/Empty"
-import Show from "components/Appointment/Show"
-import Confirm from "components/Appointment/Confirm"
-import Status from "components/Appointment/Status"
-import Error from "components/Appointment/Error"
-import Form from "components/Appointment/Form"
+import Appointment from "components/Appointment";
+import Header from "components/Appointment/Header";
+import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
+import Confirm from "components/Appointment/Confirm";
+import Status from "components/Appointment/Status";
+import Error from "components/Appointment/Error";
+import Form from "components/Appointment/Form";
 
-
-// 
+//
 // Button
-// 
+//
 
 storiesOf("Button", module)
   .addParameters({
@@ -40,50 +39,46 @@ storiesOf("Button", module)
     </Button>
   ));
 
-
-
-// 
+//
 // DayListItem
-// 
+//
 
 storiesOf("DayListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   })
   .add("Unselected", () => <DayListItem name="Monday" spots={5} />)
-  .add("Selected", () => <DayListItem name="Monday" spots={5} selected />) 
+  .add("Selected", () => <DayListItem name="Monday" spots={5} selected />)
   .add("Full", () => <DayListItem name="Monday" spots={0} />)
   .add("Clickable", () => (
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
   ));
 
-
-
-// 
+//
 // DayList
-// 
+//
 
 const days = [
   {
     id: 1,
     name: "Monday",
-    spots: 2,
+    spots: 2
   },
   {
     id: 2,
     name: "Tuesday",
-    spots: 5,
+    spots: 5
   },
   {
     id: 3,
     name: "Wednesday",
-    spots: 0,
-  },
+    spots: 0
+  }
 ];
 
 storiesOf("DayList", module)
   .addParameters({
-    backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
+    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
   })
   .add("Monday", () => (
     <DayList days={days} day={"Monday"} setDay={action("setDay")} />
@@ -92,11 +87,9 @@ storiesOf("DayList", module)
     <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
   ));
 
-
-
-// 
+//
 // InterviewerListItem
-// 
+//
 
 const interviewer = {
   id: 1,
@@ -132,11 +125,9 @@ storiesOf("InterviewerListItem", module)
     />
   ));
 
-
-
-// 
+//
 // InterviewerList
-// 
+//
 
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -164,26 +155,16 @@ storiesOf("InterviewerList", module)
     />
   ));
 
-
-
-// 
+//
 // Appointment
 //
 
 storiesOf("Appointment", module)
   .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true}]
+    backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
-  .add("Header", () => (
-    <Header
-      time="12pm"
-    />
-  ))
-  .add("Empty", () => (
-    <Empty
-      onAdd={action("onAdd")}
-    />
-  ))
+  .add("Header", () => <Header time="12pm" />)
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
   .add("Show", () => (
     <Show
       student="Lydia Miller-Jones"
@@ -199,16 +180,9 @@ storiesOf("Appointment", module)
       onConfirm={action("onConfirm")}
     />
   ))
-  .add("Status", () => (
-    <Status
-      message="Deleting"
-    />
-  ))
+  .add("Status", () => <Status message="Deleting" />)
   .add("Error", () => (
-    <Error
-      message="Could not delete appointment"
-      onClose={action("onClose")}
-    />
+    <Error message="Could not delete appointment" onClose={action("onClose")} />
   ))
   .add("Form Edit", () => (
     <Form
@@ -241,4 +215,4 @@ storiesOf("Appointment", module)
       />
       <Appointment id="last" time="1pm" />
     </Fragment>
-  ))
+  ));
