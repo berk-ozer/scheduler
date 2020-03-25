@@ -5,6 +5,7 @@ import InterviewerListItem from "components/InterviewerListItem";
 import "components/InterviewerList.scss";
 
 export default function InterviewerList(props) {
+  // Build and array of interviewer list items and render
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
@@ -23,6 +24,7 @@ export default function InterviewerList(props) {
   );
 }
 
+// Runtime test to restrict prop types to only accept specific data types
 InterviewerList.propTypes = {
   value: PropTypes.number,
   onChange: PropTypes.func.isRequired,

@@ -4,6 +4,7 @@ import classnames from "classnames";
 import "components/InterviewerListItem.scss";
 
 export default function InterviewerListItem(props) {
+  // Build the class based on the props passed in
   const interviewerClass = classnames("interviewers__item", {
     "interviewers__item--selected": props.selected,
   });
