@@ -58,6 +58,7 @@ storiesOf("DayListItem", module)
 // DayList
 //
 
+// Mock data to be used with DayList
 const days = [
   {
     id: 1,
@@ -91,6 +92,7 @@ storiesOf("DayList", module)
 // InterviewerListItem
 //
 
+// Mock data to be used with InterviewerListItem
 const interviewer = {
   id: 1,
   name: "Sylvia Palmer",
@@ -129,6 +131,7 @@ storiesOf("InterviewerListItem", module)
 // InterviewerList
 //
 
+// Mock data to be used with InterviewerList
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
   { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
