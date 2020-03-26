@@ -49,6 +49,14 @@ Hover over an appointment and click the delete button.
 
 Now you got an open spot in your schedule! May I recommend an hour in the spa?
 
+## Testing
+
+This app was extensively tested using the following technologies:
+
+- Storybook for unit testing
+- Jest for unit and integration testing
+- Cypress for end to end testing
+
 ## Getting Started
 
 1. Install all dependencies (using the `npm install` command).
