@@ -53,7 +53,7 @@ Now you got an open spot in your schedule! May I recommend an hour in the spa?
 
 1. Install all dependencies (using the `npm install` command).
 2. Download and install [scheduler-api](https://github.com/berk-ozer/scheduler-api) following the instructions on its repo.
-3. Start the API server while in the "scheduler-api" directory using the `npm start`.
+3. Start the API server while in the "scheduler-api" directory using `npm start`.
 4. Start the Webpack development server while in the "scheduler" directory using `npm start`. The app will be served at <http://localhost:8000/>. Enjoy!
 
 
