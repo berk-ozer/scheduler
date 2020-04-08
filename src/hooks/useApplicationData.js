@@ -10,7 +10,9 @@ const SET_INTERVIEW = "SET_INTERVIEW";
 // Reducer function which handles state
 function reducer(state, action) {
   const reducers = {
-
+    [SET_DAY]: function(state, value) {
+      return { ...state, ...value };
+    },
 
     [SET_APP_DATA]: function(state, value) {
       return { ...state, ...value };
