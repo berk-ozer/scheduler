@@ -6,6 +6,10 @@ Try Interview Scheduler! Built with modern React, Interview Scheduler helps you 
 
 Book, edit, and cancel interviews as you like. Keep track of the scheduled appointments easier than ever before.
 
+## Quick Start
+
+See the app live on https://react-scheduler.netlify.com/
+
 ## Final Product
 
 !["appointments"](docs/appointments.png)
@@ -18,7 +22,9 @@ Book, edit, and cancel interviews as you like. Keep track of the scheduled appoi
 
 Single-page application built with modern React practices such as hooks and functional components.
 
-This app uses HTML, SCSS, JS and React on the front-end; and  Node, Express and PostgreSQL on the back-end.
+Front-End: HTML, SCSS, React
+
+Back-End: Node, Express, PostgreSQL
 
 ## Dependencies
 
@@ -28,6 +34,7 @@ This app uses HTML, SCSS, JS and React on the front-end; and  Node, Express and 
 - Node.js
 - Express
 - Node-postgres
+
 
 ## How To Use Interview Scheduler
 
@@ -57,16 +64,10 @@ This app was extensively tested using the following technologies:
 - Jest for unit and integration testing
 - Cypress for end to end testing
 
-## Getting Started
+## Local Setup
 
 1. Install all dependencies (using the `npm install` command).
 2. Download and install [scheduler-api](https://github.com/berk-ozer/scheduler-api) following the instructions on its repo.
 3. Start the API server while in the "scheduler-api" directory using `npm start`.
 4. Start the Webpack development server while in the "scheduler" directory using `npm start`. The app will be served at <http://localhost:8000/>. Enjoy!
-
-
-
-## Coming Soon
-
-Deploying the app on Heroku so you can get on it more easily!
 
